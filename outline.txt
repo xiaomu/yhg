@@ -1,0 +1,4 @@
+1)  计时器, 时间间隔并不同；
+2)  每隔 server 在 manager 上有一个 struct 的实例， 保存 server 的相关信息；
+3)  manager 上有一个数组，为 server 代号数组， 当接到查询时， 用哈希返回相应 IP；
+4)  定义命令；
