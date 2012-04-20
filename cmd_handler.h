@@ -1,30 +1,14 @@
 /*****************************************************************************
  *  Copyright          :  2012  All Rights Reserved.
  *
- *  Date               :  2012-04-20 12:04:58
+ *  Date               :  2012-04-20 12:06:00
  *  Author             :  Dengzhaoqun
  *****************************************************************************/
-#include <stdio.h>
+#ifndef _CMD_HANDLER_H
+#define _CMD_HANDLER_H
 
-struct st
-{
-	int i;
-};
+#define HANDLER_NUM 1024
 
-struct st2
-{
-	struct st to;
-};
+int (*cmd_handler[HANDLER_NUM])(int cmd_len, (void *)cmd_content, int *err);
 
-int main()
-{
-	struct st2 to2;
-
-	to2.to.i = 1;
-	printf("%d\n", to2.to.i);
-
-	return 0;
-
-}
-	
-
+#endif

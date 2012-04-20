@@ -1,13 +1,13 @@
+/*****************************************************************************
+ *  Copyright          :  2012  All Rights Reserved.
+ *
+ *  Date               :  2012-04-20 12:06:00
+ *  Author             :  Dengzhaoqun
+ *****************************************************************************/
 #ifndef _STRUCT_DEF
 #define _STRUCT_DEF
 
-#include <netinet/in.h>
 
-typedef struct
-{
-	struct sockaddr_in cs_addr;
-	int client_num;
-}cs_info;
 
 
 #endif

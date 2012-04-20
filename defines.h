@@ -1,30 +1,15 @@
 /*****************************************************************************
  *  Copyright          :  2012  All Rights Reserved.
  *
- *  Date               :  2012-04-20 12:04:58
+ *  Date               :  2012-04-20 12:06:00
  *  Author             :  Dengzhaoqun
  *****************************************************************************/
-#include <stdio.h>
 
-struct st
-{
-	int i;
-};
 
-struct st2
-{
-	struct st to;
-};
+#ifndef _DEFINES_H
+#define _DEFINES_H
 
-int main()
-{
-	struct st2 to2;
+#define DATE_TIME_LEN 20
+typedef char date_time_t[DATE_TIME_LEN];
 
-	to2.to.i = 1;
-	printf("%d\n", to2.to.i);
-
-	return 0;
-
-}
-	
-
+#endif

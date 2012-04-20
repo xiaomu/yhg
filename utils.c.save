@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+
+#include "utils.c"
+
+void date_time(date_time_t *dt)
+{
+      time_t myt;
+	struct tm *mytm;
+      time(&myt);
+	mytm = localtime(&myt);
+
+	buf = (char *)malloc(20 * sizeof(char));
+	if(buf == NULL)
+	{
+	      perror("date_time() malloc failed");
+	      return NULL;
+	}
+	memset(buf, 0, 20);
+	strftime(buf, 20, "%Y-%m-%d %H:%M:%S", mytm);
+
+	return buf;
+}
