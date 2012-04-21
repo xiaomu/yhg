@@ -43,6 +43,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="con_mng.h" />
+		<Unit filename="con_server.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="con_server.h" />
 		<Unit filename="defines.h" />
 		<Unit filename="error.c">
 			<Option compilerVar="CC" />

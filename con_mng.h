@@ -8,12 +8,15 @@
 #define _CON_MNG_H
 
 #define CM_CS_BLOCK_SIZE 20
+#define CM_TIMER_SEC 10
+#define CM_TIMER_USEC 0
 
 #include <netinet/in.h>
 typedef struct
 {
 	struct sockaddr_in cs_addr;
 	int client_num;
+	int update_flag;
 }cs_info_t;
 
 typedef struct
@@ -24,7 +27,8 @@ typedef struct
 
 struct
 {
-	cs_block_t *cm_cs_blocks;
+	cs_block_t cm_cs_blocks;
+	int cs_num;
 }cm;
 
 struct
@@ -41,6 +45,14 @@ typedef struct
 }free_info_t;
 free_info_t cm_free;
 
+
+
+// functions
+cs_block_t *cm_create_block();
+int cm_build_free(cs_block_t *blk);
+int cm_expand_online();
+int cm_set_timer(long sec, long usec);
+int cm_remove_cs_by_infoaddr(cs_info_t *info);
 #endif
 
 

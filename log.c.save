@@ -1,12 +1,16 @@
-// add time to log msg
-
-log_msg(char *str); // log.c
-log_err(char *str, int err_num); // log.c
+/*****************************************************************************
+ *  Copyright          :  2012  All Rights Reserved.
+ *
+ *  Date               :  2012-04-20 12:04:58
+ *  Author             :  Dengzhaoqun
+ *****************************************************************************/
 
 
 #include <stdio.h>
 
 #include "utils.h"
+#include "defines.h"
+#include "error.h"
 
 static FILE *fp_msg;
 static FILE *fp_err;
@@ -35,5 +39,22 @@ int init_log(char *msg_path, char *err_path)
 // write msg to log
 void log_msg(char *msg)
 {
+      date_time_t dt;
+      
+      date_time(&dt);
+      fprintf(fp_msg, "%s", (char *)&dt);
+      fprintf(fp_msg, "%s",msg);
+      fprintf(fp_msg, "\n");
 
+}
+
+// write msg and error number msg to log
+void log_err(char *msg, int err_num)
+{
+      date_time_t dt;
+      
+      date_time(&dt);
+      fprintf(fp_err, "%s", (char *)&dt);
+      fprintf(fp_err, "%s", msg);
+      fprintf(fp_err,"err num: %d", err_num);
 }
