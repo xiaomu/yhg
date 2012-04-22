@@ -9,7 +9,7 @@
 
 #include "cmd.h"
 #include "cmd_handler.h"
-#include "log.h"
+#inlcude "lo
 
 
 int recv_cmd(int fd)
@@ -36,4 +36,11 @@ int recv_cmd(int fd)
       return 0;
 }
 
+int send_cmd(int fd, int cmd_id, int len, void *content, int *err)
+{
+      write(fd, cmd_id, sizeof(int));
+      write(fd, len, sizeof(int));
+      write(fd, content, len);
 
+      return 0;
+}

@@ -1,25 +1,27 @@
+/*****************************************************************************
+ *  Copyright          :  2012  All Rights Reserved.
+ *
+ *  Date               :  2012-04-20 12:04:58
+ *  Author             :  Dengzhaoqun
+ *****************************************************************************/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-
-#include "utils.c"
-
+ 
+#include "utils.h"
+#include "defines.h"
+ 
 void date_time(date_time_t *dt)
 {
-      time_t myt;
-	struct tm *mytm;
-      time(&myt);
-	mytm = localtime(&myt);
-
-	buf = (char *)malloc(20 * sizeof(char));
-	if(buf == NULL)
-	{
-	      perror("date_time() malloc failed");
-	      return NULL;
-	}
-	memset(buf, 0, 20);
-	strftime(buf, 20, "%Y-%m-%d %H:%M:%S", mytm);
-
-	return buf;
+    time_t myt;
+    struct tm *mytm;
+ 
+    time(&myt);
+    mytm = localtime(&myt);
+ 
+    memset(dt, 0, 20);
+    strftime(dt, 20, "%Y-%m-%d %H:%M:%S", mytm);
+ 
 }
+ 

@@ -29,7 +29,7 @@ int init_log(char *msg_path, char *err_path)
       if(fp_err == NULL)
       {
             perror(err_path);
-            return -1
+            return -1;
       }
 
       return 0;

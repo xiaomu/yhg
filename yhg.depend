@@ -1,0 +1,76 @@
+# depslib dependency file v1.0
+1335011380 source:/home/laodeng/git_code/yhg/cmd_handler.c
+	<stdio.h>
+	"cmd_handler.h"
+
+1335068323 /home/laodeng/git_code/yhg/cmd_handler.h
+
+1335069991 source:/home/laodeng/git_code/yhg/cmd.c
+	<stdio.h>
+	<unistd.h>
+	"cmd.h"
+	"cmd_handler.h"
+	"log.h"
+
+1335011151 /home/laodeng/git_code/yhg/cmd.h
+
+1334900659 /home/laodeng/git_code/yhg/log.h
+
+1335075662 source:/home/laodeng/git_code/yhg/con_mng.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<sys/time.h>
+	<signal.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	"con_mng.h"
+	"error.h"
+	"log.h"
+	"cmd.h"
+
+1335072621 /home/laodeng/git_code/yhg/con_mng.h
+	<netinet/in.h>
+
+1335073439 /home/laodeng/git_code/yhg/error.h
+
+1335076109 source:/home/laodeng/git_code/yhg/con_server.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<unistd.h>
+	<stdlib.h>
+	<sys/time.h>
+	<signal.h>
+	"con_server.h"
+	"log.h"
+	"error.h"
+	"cmd.h"
+	"utils.h"
+
+1335073180 /home/laodeng/git_code/yhg/con_server.h
+
+1335073589 source:/home/laodeng/git_code/yhg/error.c
+	"error.h"
+
+1335073603 source:/home/laodeng/git_code/yhg/log.c
+	<stdio.h>
+	"utils.h"
+	"defines.h"
+	"error.h"
+
+1335076139 /home/laodeng/git_code/yhg/utils.h
+	"defines.h"
+
+1334894760 /home/laodeng/git_code/yhg/defines.h
+
+1335076221 source:/home/laodeng/git_code/yhg/utils.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<time.h>
+	"utils.h"
+	"defines.h"
+

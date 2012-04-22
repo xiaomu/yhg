@@ -6,9 +6,6 @@
  *****************************************************************************/
 #include "error.h"
 
-void init_err_msg()
-{
-    err_msg[ERR_MALLOC_FAILED] = "malloc failed";
-
-}
+char *err_msg[ERR_NUM];
+err_msg[ERR_MALLOC_FAILED] = "malloc failed";
 

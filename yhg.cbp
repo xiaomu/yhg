@@ -27,6 +27,19 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
+			<Target title="con_server">
+				<Option output="bin/con_server/yhg" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/con_server/" />
+				<Option object_output="obj/con_server/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />

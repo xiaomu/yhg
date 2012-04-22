@@ -10,6 +10,7 @@
 #include "defines.h"
 
 void date_time(date_time_t *dt);
+void help(char *menu[]);
 
 
 #endif

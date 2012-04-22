@@ -9,6 +9,6 @@
 
 #define HANDLER_NUM 1024
 
-int (*cmd_handler[HANDLER_NUM])(int cmd_len, void *cmd_content, int *err);
+int (*cmd_handler[HANDLER_NUM])(int fd, int *err);
 
 #endif

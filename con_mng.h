@@ -12,17 +12,20 @@
 #define CM_TIMER_USEC 0
 
 #include <netinet/in.h>
+
 typedef struct
 {
-	struct sockaddr_in cs_addr;
+//	struct sockaddr_in cs_addr;
+    unsigned long int s_addr;   // ip地址中的四个字节组成一个32位的值 -- 通过ip唯一标识节点
+    int port;
 	int client_num;
 	int update_flag;
 }cs_info_t;
 
-typedef struct
+typedef struct CS_block
 {
 	cs_info_t *block;
-	cs_block_t *next;
+	struct CS_block *next;
 }cs_block_t;
 
 struct
@@ -38,21 +41,26 @@ struct
 	cs_info_t **ptrs;
 }cm_online;
 
-typedef struct
+typedef struct Free_info
 {
 	cs_info_t *info;
-	free_info_t *next;
+	struct Free_info *next;
 }free_info_t;
 free_info_t cm_free;
 
 
 
 // functions
+int init_cm();
 cs_block_t *cm_create_block();
 int cm_build_free(cs_block_t *blk);
 int cm_expand_online();
 int cm_set_timer(long sec, long usec);
 int cm_remove_cs_by_infoaddr(cs_info_t *info);
+cs_info_t *cm_serch_cs_by_addr(unsigned long s_addr);
+cs_info_t **cm_online_search_by_ptr(cs_info_t *ptr);
+void cm_check_set_update(int signum);
+
 #endif
 
 

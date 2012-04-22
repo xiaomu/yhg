@@ -14,13 +14,27 @@
 
 void date_time(date_time_t *dt)
 {
-      time_t myt;
-	struct tm *mytm;
+    time_t myt;
+    struct tm *mytm;
 
-      time(&myt);
-	mytm = localtime(&myt);
+    time(&myt);
+    mytm = localtime(&myt);
 
-	memset(dt, 0, 20);
-	strftime(dt, 20, "%Y-%m-%d %H:%M:%S", mytm);
+    memset(dt, 0, 20);
+    strftime((char *)dt, 20, "%Y-%m-%d %H:%M:%S", mytm);
+
+}
+
+
+void help(char *menu[])
+{
+    char **ptr;
+
+    ptr = menu;
+    while(*ptr != NULL)
+    {
+        printf("%s", *ptr);
+        *ptr ++;
+    }
 
 }
