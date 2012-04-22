@@ -1,9 +1,3 @@
-/*****************************************************************************
- *  Copyright          :  2012  All Rights Reserved.
- *
- *  Date               :  2012-04-20 12:04:58
- *  Author             :  Dengzhaoqun
- *****************************************************************************/
 #include <stdio.h>
 #include <unistd.h>
 
@@ -52,5 +46,3 @@ int handle_cs_notice_cm(int fd, unsigned long s_addr, int *err)
 
     return 0;
 }
-
-

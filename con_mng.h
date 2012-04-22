@@ -7,8 +7,8 @@
 #ifndef _CON_MNG_H
 #define _CON_MNG_H
 
-#define CM_CS_BLOCK_SIZE 20
-#define CM_TIMER_SEC 10
+#define CM_CS_BLOCK_SIZE 3
+#define CM_TIMER_SEC 100
 #define CM_TIMER_USEC 0
 
 #include <netinet/in.h>
@@ -32,6 +32,8 @@ struct
 {
 	cs_block_t cm_cs_blocks;
 	int cs_num;
+	int cm_port;
+	int listen_num;
 }cm;
 
 struct
@@ -60,6 +62,9 @@ int cm_remove_cs_by_infoaddr(cs_info_t *info);
 cs_info_t *cm_serch_cs_by_addr(unsigned long s_addr);
 cs_info_t **cm_online_search_by_ptr(cs_info_t *ptr);
 void cm_check_set_update(int signum);
+int cm_build_server(int port, int listen_num);
+int cm_add_cs(unsigned long s_addr, int port, int client_num);
+int cm_update_cs(unsigned long s_addr, int port, int client_num);
 
 #endif
 

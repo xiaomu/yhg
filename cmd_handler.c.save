@@ -5,7 +5,22 @@
  *  Author             :  Dengzhaoqun
  *****************************************************************************/
 #include <stdio.h>
+#include <unistd.h>
 
 #include "cmd_handler.h"
+#include "con_mng.h"
+#include "cmd.h"
+#include "log.h"
 
 // read cmd_id and handle it with the responding function
+
+int (*cmd_handler[HANDLER_NUM])(int fd, unsigned long s_addr, int *err);
+
+void init_cmd_handler()
+{
+    cmd_handler[CS_NOTICE_CM] = handle_cs_notice_cm;
+}
+
+
+
+

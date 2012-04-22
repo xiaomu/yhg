@@ -9,6 +9,10 @@
 
 #define HANDLER_NUM 1024
 
-int (*cmd_handler[HANDLER_NUM])(int fd, int *err);
+int (*cmd_handler[HANDLER_NUM])(int fd, unsigned long s_addr, int *err);
+
+int handle_cs_notice_cm(int fd, unsigned long s_addr, int *err);
+
+void init_cmd_handler();
 
 #endif

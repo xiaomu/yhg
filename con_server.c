@@ -14,7 +14,7 @@
 #include "cmd.h"
 #include "utils.h"
 
-/*
+ #if 0
 int main(int argc, char *argv[])
 {
     // get opt
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 
     char *menu[] =
     {
-        "conserver -p cs_port -m cm_ip -n cm_port\n",
+        "con_server -p cs_port -m cm_ip -n cm_port\n",
         NULL
     };
 
@@ -54,13 +54,18 @@ int main(int argc, char *argv[])
         }
     }
 
-
+    init_err_msg();
+    init_log(NULL, NULL);
     init_cs();
+    cs_set_notice_cm_timer(CS_NOTICE_CM_INTERVAL_SEC, CS_NOTICE_CM_INTERVAL_USEC);
 
+    while(1)
+    {
+        sleep(3);
+    }
     return 0;
 }
-
-*/
+ #endif
 
 int init_cs()
 {
@@ -90,6 +95,7 @@ void cs_notice_cm(int signum)
     int len;
     struct sockaddr_in address;
     int result, cmd_id;
+    int ret;
 
     /*  Create a socket for the client.  */
 
@@ -111,13 +117,26 @@ void cs_notice_cm(int signum)
         log_err("cs_notice_cm()", ERR_CONNECT_FAILED);
         return;
     }
+    log_msg("connect succeed");
 
     /*  We can now read/write via sockfd.  */
 
     cmd_id = CS_NOTICE_CM;
-    write(sockfd, &cmd_id, sizeof(int));
-    write(sockfd, &cs.cs_port, sizeof(int));
-    write(sockfd, &cs.client_num, sizeof(int));
+    ret = write(sockfd, &cmd_id, sizeof(int));
+    if(ret == -1)
+    {
+        perror("write failed");
+    }
+    ret = write(sockfd, &cs.cs_port, sizeof(int));
+    if(ret == -1)
+    {
+        perror("write failed");
+    }
+    ret = write(sockfd, &cs.client_num, sizeof(int));
+    if(ret == -1)
+    {
+        perror("write failed");
+    }
 //    send_cmd(sockfd, CS_NOTICE_CM, sizeof(int), &(cs.client_num), NULL);
     close(sockfd);
 

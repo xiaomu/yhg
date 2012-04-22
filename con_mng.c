@@ -16,6 +16,8 @@
 #include "error.h"
 #include "log.h"
 #include "cmd.h"
+#include "utils.h"
+#include "cmd_handler.h"
 
 // add, remove cs 操作都只在 cm_timer 触发的时候执行
 // 这样就不用对每一个 cs 设置 timer 了
@@ -23,15 +25,60 @@
 
 // 先不要考虑太多速度， 等后面出现瓶颈时再优化
 
-
-int main()
+// #if 0
+int main(int argc, char *argv[])
 {
+    int opt;
+    int ret;
 
+    char *menu[] =
+    {
+        "con_mng -p port -n listen_num\n",
+        NULL
+    };
+
+    if(argc < 4)
+    {
+        help(menu);
+        return -1;
+    }
+
+    while((opt = getopt(argc, argv, "p:n:")) != -1)
+    {
+        switch(opt)
+        {
+        case 'p':
+            cm.cm_port = atoi(optarg);
+        case 'n':
+            cm.listen_num = atoi(optarg);
+            break;
+        case ':':
+            printf("option needs a value\n");
+            break;
+        case '?':
+            printf("unknown option: %c\n", optopt);
+            break;
+
+        }
+    }
+
+    init_err_msg();
+    init_cmd_handler();
+    init_log(NULL, NULL);
     init_cm();
+
+    ret = cm_build_server(cm.cm_port, cm.listen_num);
+    if(ret != 0)
+    {
+        log_msg("cm_build_server() failed");
+        return -1;
+    }
+
+    cm_set_timer(CM_TIMER_SEC, CM_TIMER_USEC);
 
     return 0;
 }
-
+// endif
 
 
 int init_cm()
@@ -295,6 +342,7 @@ cs_info_t *cm_serch_cs_by_addr(unsigned long s_addr)
             }
             info++;
         }
+        blk = blk->next;
     }
 
     return NULL;
@@ -343,6 +391,7 @@ void cm_check_set_update(int signum)
     cs_info_t *info;
     int i;
 
+    printf("cm.cs_num: %d\n", cm.cs_num);
     blk = cm.cm_cs_blocks.next;
     while(blk != NULL)
     {
@@ -351,13 +400,18 @@ void cm_check_set_update(int signum)
         {
             if(info->update_flag == 1)
             {
-                info->update_flag = 0;
+                info->update_flag = -1;
+            }
+            else if(info->update_flag == 0)
+            {
+                continue;
             }
             else
             {
                 cm_remove_cs_by_infoaddr(info);
             }
         }
+        blk = blk->next;
     }
 
 }
@@ -408,8 +462,8 @@ int cm_build_server(int port, int listen_num)
         if(result < 1)
         {
             perror("select() failed");
-            log_err("select() failed", ERR_SELECT_FAILED);
-            exit(1);
+            log_err("cm_build_server()", ERR_SELECT_FAILED);
+            continue;
         }
 
         /*  Once we know we've got activity,
@@ -441,7 +495,9 @@ int cm_build_server(int port, int listen_num)
 
                     if(nread != 0)
                     {
-                        recv_cmd(fd);
+                        log_msg("do recv_cmd()");
+                        recv_cmd(fd, client_address.sin_addr.s_addr);
+                        log_msg("done recv_cmd()");
                     }
 
                     close(fd);
@@ -453,5 +509,6 @@ int cm_build_server(int port, int listen_num)
         }
     }
 }
+
 
 

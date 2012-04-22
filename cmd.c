@@ -12,7 +12,7 @@
 #include "log.h"
 
 
-int recv_cmd(int fd)
+int recv_cmd(int fd, unsigned long s_addr)
 {
       int cmd_id;
       int err;
@@ -24,10 +24,11 @@ int recv_cmd(int fd)
       if(cmd_handler[cmd_id] != NULL)
       {
             err = 0;
-            (cmd_handler[cmd_id])(fd, &err);
+            sprintf(tmp, "(cmd_handler[%d])()", cmd_id);
+            log_msg(tmp);
+            (cmd_handler[cmd_id])(fd, s_addr, &err);
             if(err)
             {
-                  sprintf(tmp, "(cmd_handler[%d]) failed", cmd_id);
                   log_err(tmp, err);
                   return -1;
             }

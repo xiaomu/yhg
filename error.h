@@ -18,4 +18,5 @@ char *err_msg[ERR_NUM];
 #define ERR_SELECT_FAILED 201
 #define ERR_CONNECT_FAILED 202
 
+void init_err_msg();
 #endif
