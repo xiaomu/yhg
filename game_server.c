@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,6 +14,9 @@
 #include "error.h"
 #include "cmd.h"
 #include "utils.h"
+#include "game_server.h"
+
+
 
  #if 0
 int main(int argc, char *argv[])
@@ -22,7 +26,7 @@ int main(int argc, char *argv[])
 
     char *menu[] =
     {
-        "con_server -p cs_port -m cm_ip -n cm_port\n",
+        "game_server -p gs_port -m gm_ip -n gm_port\n",
         NULL
     };
 
@@ -37,12 +41,12 @@ int main(int argc, char *argv[])
         switch(opt)
         {
             case 'p':
-                cs.cs_port = atoi(optarg);
+                gs.gs_port = atoi(optarg);
             case 'm':
-                cs.cm_ip = optarg;
+                gs.gm_ip = optarg;
                 break;
             case 'n':
-                cs.cm_port = atoi(optarg);
+                gs.gm_port = atoi(optarg);
                 break;
             case ':':
                 printf("option needs a value\n");
@@ -63,8 +67,8 @@ int main(int argc, char *argv[])
     init_cmd_handler();
 
 
-    init_cs();
-    cs_set_notice_cm_timer(CS_NOTICE_CM_INTERVAL_SEC, CS_NOTICE_CM_INTERVAL_USEC);
+    init_gs();
+    gs_set_notice_gm_timer(GS_NOTICE_GM_INTERVAL_SEC, GS_NOTICE_GM_INTERVAL_USEC);
 
     while(1)
     {
@@ -74,15 +78,15 @@ int main(int argc, char *argv[])
 }
  #endif
 
-int init_cs()
+int init_gs()
 {
-    cs.client_num = 0;
+    gs.cs_num = 0;
 
     return 0;
 }
 
 
-int cs_set_notice_cm_timer(int sec, int usec)
+int gs_set_notice_cm_timer(int sec, int usec)
 {
     struct itimerval timer;
     timer.it_interval.tv_sec = sec;
@@ -91,12 +95,12 @@ int cs_set_notice_cm_timer(int sec, int usec)
     timer.it_value.tv_usec = usec;
 
     setitimer(ITIMER_REAL, &timer, NULL);
-    signal(SIGALRM, cs_notice_cm);
+    signal(SIGALRM, gs_notice_gm);
 
     return 0;
 }
 
-void cs_notice_cm(int signum)
+void gs_notice_cm(int signum)
 {
     int sockfd;
     int len;
@@ -111,8 +115,8 @@ void cs_notice_cm(int signum)
     /*  Name the socket, as agreed with the server.  */
 
     address.sin_family = AF_INET;
-    address.sin_addr.s_addr = inet_addr(cs.cm_ip);
-    address.sin_port = htons(cs.cm_port);
+    address.sin_addr.s_addr = inet_addr(gs.gm_ip);
+    address.sin_port = htons(gs.gm_port);
     len = sizeof(address);
 
     /*  Now connect our socket to the server's socket.  */
@@ -121,37 +125,37 @@ void cs_notice_cm(int signum)
 
     if(result == -1)
     {
-        log_err("cs_notice_cm()", ERR_CONNECT_FAILED);
+        log_err("gs_notice_cm()", ERR_CONNECT_FAILED);
         return;
     }
     log_msg("connect succeed");
 
     /*  We can now read/write via sockfd.  */
 
-    cmd_id = CS_NOTICE_CM;
+    cmd_id = GS_NOTICE_CM;
     ret = write(sockfd, &cmd_id, sizeof(int));
     if(ret == -1)
     {
         perror("write failed");
     }
-    ret = write(sockfd, &cs.cs_port, sizeof(int));
+    ret = write(sockfd, &gs.gs_port, sizeof(int));
     if(ret == -1)
     {
         perror("write failed");
     }
-    ret = write(sockfd, &cs.client_num, sizeof(int));
+    ret = write(sockfd, &gs.cs_num, sizeof(int));
     if(ret == -1)
     {
         perror("write failed");
     }
-//    send_cmd(sockfd, CS_NOTICE_CM, sizeof(int), &(cs.client_num), NULL);
+//    send_cmd(sockfd, gs_NOTICE_CM, sizeof(int), &(gs.client_num), NULL);
     close(sockfd);
 
 }
 
 
 
-int cs_build_server(int port, int listen_num)
+int gs_build_server(int port, int listen_num)
 {
     int server_sockfd, client_sockfd;
     int server_len, client_len;
@@ -199,7 +203,7 @@ int cs_build_server(int port, int listen_num)
         if(result < 1)
         {
             perror("select() failed");
-            log_err("cs_build_server()", ERR_SELECT_FAILED);
+            log_err("gs_build_server()", ERR_SELECT_FAILED);
             continue;
         }
 

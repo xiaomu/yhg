@@ -51,7 +51,7 @@ int init_log(char *msg_path, char *err_path)
 }
 
 // write msg to log
-void log_msg(char *msg)
+void log_msg(const char *msg)
 {
     date_time_t dt;
 

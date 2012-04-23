@@ -8,7 +8,7 @@
 #define _LOG_H
 
 int init_log(char *msg_path, char *err_path);
-void log_msg(char *msg);
+void log_msg(const char *msg);
 void log_err(char *msg, int err_num);
 
 #endif

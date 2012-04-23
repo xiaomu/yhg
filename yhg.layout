@@ -1,47 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="cmd.c" open="1" top="0" tabpos="4">
-		<Cursor position="710" topLine="20" />
+	<File name="client.c" open="0" top="0" tabpos="0">
+		<Cursor position="151" topLine="0" />
 	</File>
-	<File name="cmd.h" open="1" top="0" tabpos="11">
-		<Cursor position="554" topLine="0" />
+	<File name="client.h" open="0" top="0" tabpos="0">
+		<Cursor position="46" topLine="0" />
 	</File>
-	<File name="cmd_handler.c" open="1" top="0" tabpos="3">
-		<Cursor position="863" topLine="22" />
+	<File name="cmd.c" open="0" top="0" tabpos="4">
+		<Cursor position="710" topLine="4" />
 	</File>
-	<File name="cmd_handler.h" open="1" top="0" tabpos="2">
+	<File name="cmd.h" open="0" top="0" tabpos="11">
+		<Cursor position="331" topLine="0" />
+	</File>
+	<File name="cmd_handler.c" open="0" top="0" tabpos="1">
+		<Cursor position="817" topLine="19" />
+	</File>
+	<File name="cmd_handler.h" open="0" top="0" tabpos="2">
 		<Cursor position="519" topLine="0" />
 	</File>
-	<File name="con_mng.c" open="1" top="1" tabpos="1">
-		<Cursor position="8575" topLine="131" />
+	<File name="con_mng.c" open="0" top="0" tabpos="3">
+		<Cursor position="12440" topLine="87" />
 	</File>
-	<File name="con_mng.h" open="1" top="0" tabpos="2">
-		<Cursor position="1312" topLine="42" />
+	<File name="con_mng.h" open="0" top="0" tabpos="2">
+		<Cursor position="976" topLine="41" />
 	</File>
-	<File name="con_server.c" open="1" top="0" tabpos="5">
-		<Cursor position="1344" topLine="9" />
+	<File name="con_server.c" open="1" top="0" tabpos="1">
+		<Cursor position="6168" topLine="8" />
 	</File>
-	<File name="con_server.h" open="1" top="0" tabpos="9">
-		<Cursor position="367" topLine="0" />
+	<File name="con_server.h" open="0" top="0" tabpos="9">
+		<Cursor position="48" topLine="0" />
+	</File>
+	<File name="db_server.c" open="0" top="0" tabpos="0">
+		<Cursor position="195" topLine="0" />
+	</File>
+	<File name="db_server.h" open="0" top="0" tabpos="0">
+		<Cursor position="54" topLine="0" />
 	</File>
 	<File name="defines.h" open="0" top="0" tabpos="18">
 		<Cursor position="367" topLine="0" />
 	</File>
-	<File name="error.c" open="1" top="0" tabpos="14">
+	<File name="error.c" open="0" top="0" tabpos="14">
 		<Cursor position="340" topLine="0" />
 	</File>
-	<File name="error.h" open="1" top="0" tabpos="3">
+	<File name="error.h" open="0" top="0" tabpos="3">
 		<Cursor position="530" topLine="0" />
 	</File>
-	<File name="log.c" open="1" top="0" tabpos="15">
-		<Cursor position="768" topLine="20" />
+	<File name="game_mng.c" open="0" top="0" tabpos="0">
+		<Cursor position="9972" topLine="467" />
+	</File>
+	<File name="game_mng.h" open="0" top="0" tabpos="0">
+		<Cursor position="146" topLine="0" />
+	</File>
+	<File name="game_server.c" open="1" top="1" tabpos="2">
+		<Cursor position="1258" topLine="0" />
+	</File>
+	<File name="game_server.h" open="1" top="0" tabpos="3">
+		<Cursor position="211" topLine="0" />
+	</File>
+	<File name="log.c" open="0" top="0" tabpos="4">
+		<Cursor position="1057" topLine="35" />
 	</File>
 	<File name="log.h" open="0" top="0" tabpos="5">
-		<Cursor position="378" topLine="0" />
+		<Cursor position="449" topLine="0" />
 	</File>
-	<File name="utils.c" open="1" top="0" tabpos="16">
-		<Cursor position="789" topLine="11" />
+	<File name="utils.c" open="0" top="0" tabpos="16">
+		<Cursor position="789" topLine="4" />
 	</File>
 	<File name="utils.h" open="0" top="0" tabpos="6">
 		<Cursor position="419" topLine="0" />

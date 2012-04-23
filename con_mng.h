@@ -8,7 +8,7 @@
 #define _CON_MNG_H
 
 #define CM_CS_BLOCK_SIZE 3
-#define CM_TIMER_SEC 100
+#define CM_TIMER_SEC 30
 #define CM_TIMER_USEC 0
 
 #include <netinet/in.h>

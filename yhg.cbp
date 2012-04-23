@@ -45,6 +45,12 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="client.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="client.h" />
 		<Unit filename="cmd.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -61,11 +67,23 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="con_server.h" />
+		<Unit filename="db_server.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="db_server.h" />
 		<Unit filename="defines.h" />
 		<Unit filename="error.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="error.h" />
+		<Unit filename="game_mng.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="game_mng.h" />
+		<Unit filename="game_server.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="game_server.h" />
 		<Unit filename="log.c">
 			<Option compilerVar="CC" />
 		</Unit>

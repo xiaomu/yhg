@@ -18,6 +18,9 @@ int (*cmd_handler[HANDLER_NUM])(int fd, unsigned long s_addr, int *err);
 
 void init_cmd_handler()
 {
+
+    log_msg(__FUNCTION__);
+
     cmd_handler[CS_NOTICE_CM] = handle_cs_notice_cm;
 }
 
@@ -26,6 +29,8 @@ int handle_cs_notice_cm(int fd, unsigned long s_addr, int *err)
     cs_info_t *info;
     int port, client_num;
     int ret;
+
+    log_msg(__FUNCTION__);
 
     read(fd, &port, sizeof(int));
     read(fd, &client_num, sizeof(int));
