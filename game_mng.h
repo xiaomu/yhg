@@ -16,10 +16,10 @@ typedef struct
 	int update_flag;
 }gs_info_t;
 
-typedef struct CS_block
+typedef struct GS_block
 {
-	cs_info_t *block;
-	struct CS_block *next;
+	gs_info_t *block;
+	struct GS_block *next;
 }gs_block_t;
 
 struct
@@ -28,7 +28,7 @@ struct
 	int gs_num;
 	int gm_port;
 	int listen_num;
-}cm;
+}gm;
 
 struct
 {
@@ -37,10 +37,10 @@ struct
 	gs_info_t **ptrs;
 }gm_online;
 
-typedef struct Free_info
+typedef struct GM_free_info
 {
 	gs_info_t *info;
-	struct Free_info *next;
+	struct GM_free_info *next;
 }free_gs_info_t;
 free_gs_info_t gm_free;
 
@@ -53,7 +53,7 @@ int gm_build_free(gs_block_t *blk);
 int gm_expand_online();
 int gm_set_timer(long sec, long usec);
 int gm_remove_gs_by_infoaddr(gs_info_t *info);
-gs_info_t *gm_serch_gs_by_addr(unsigned long s_addr);
+gs_info_t *gm_search_gs_by_addr(unsigned long s_addr);
 gs_info_t **gm_online_search_by_ptr(gs_info_t *ptr);
 void gm_check_set_update(int signum);
 int gm_build_server(int port, int listen_num);

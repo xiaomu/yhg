@@ -15,10 +15,10 @@ struct
       char *gm_ip;
       int gm_port;
       int gs_port;
-}cs;
+}gs;
 
 
 int init_gs();
 int gs_set_notice_gm_timer(int sec, int usec);
-void gs_notice_cm(int signum);
+void gs_notice_gm(int signum);
 #endif

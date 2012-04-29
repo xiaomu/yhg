@@ -7,72 +7,14 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <signal.h>
+#include <sys/ioctl.h>
 
 #include "con_server.h"
 #include "log.h"
 #include "error.h"
 #include "cmd.h"
 #include "utils.h"
-
-
-// #if 0
-int main(int argc, char *argv[])
-{
-    int opt;
-    int ret;
-
-
-
-    char *menu[] =
-    {
-        "game_mng -p port -n listen_num\n",
-        NULL
-    };
-
-    if(argc < 4)
-    {
-        help(menu);
-        return -1;
-    }
-
-    while((opt = getopt(argc, argv, "p:n:")) != -1)
-    {
-        switch(opt)
-        {
-        case 'p':
-            gm.gm_port = atoi(optarg);
-        case 'n':
-            gm.listen_num = atoi(optarg);
-            break;
-        case ':':
-            printf("option needs a value\n");
-            break;
-        case '?':
-            printf("unknown option: %c\n", optopt);
-            break;
-
-        }
-    }
-
-    init_log(NULL, NULL);
-    log_msg(__FUNCTION__);
-    init_err_msg();
-    init_cmd_handler();
-
-    init_gm();
-
-    ret = gm_build_server(gm.gm_port, gm.listen_num);
-    if(ret != 0)
-    {
-        log_msg("gm_build_server() failed");
-        return -1;
-    }
-
-
-    return 0;
-}
-// endif
-
+#include "game_mng.h"
 
 int init_gm()
 {
@@ -159,7 +101,7 @@ int gm_add_gs(unsigned long s_addr, int port, int client_num)
             return -1;
         }
     }
-    gm_online.ptrs[cm_online.cnt] = tmp;
+    gm_online.ptrs[gm_online.cnt] = tmp;
     gm_online.cnt ++;
     gm_online.free --;
 
@@ -176,7 +118,7 @@ int gm_update_gs(unsigned long s_addr, int port, int client_num)
 
     log_msg(__FUNCTION__);
 
-    ptr = gm_serch_gs_by_addr(s_addr);
+    ptr = gm_search_gs_by_addr(s_addr);
     if(ptr == NULL)
     {
         log_err("gm_update_gs()", ERR_NO_CS);
@@ -198,7 +140,7 @@ int gm_remove_gs(unsigned long s_addr)
 
     log_msg(__FUNCTION__);
 
-    ptr = gm_serch_gs_by_addr(s_addr);
+    ptr = gm_search_gs_by_addr(s_addr);
     if(ptr == NULL)
     {
         log_err("gm_update_gs()", ERR_NO_CS);
@@ -221,7 +163,7 @@ int gm_remove_gs(unsigned long s_addr)
 int gm_remove_gs_by_infoaddr(gs_info_t *info)
 {
     gs_info_t **temp;
-    free_info_t *fin;
+    free_gs_info_t *fin;
 
     log_msg(__FUNCTION__);
 
@@ -237,7 +179,7 @@ int gm_remove_gs_by_infoaddr(gs_info_t *info)
 
     gm.gs_num --;
 
-    fin = (free_info_t *)malloc(sizeof(free_info_t));
+    fin = (free_gs_info_t *)malloc(sizeof(free_gs_info_t));
     if(fin == NULL)
     {
         log_err("cm_remove_cs() malloc failed", ERR_MALLOC_FAILED);
@@ -343,7 +285,7 @@ int gm_expand_online()
 
 
 // search a cs in cm by addr
-gs_info_t *gm_serch_gs_by_addr(unsigned long s_addr)
+gs_info_t *gm_search_gs_by_addr(unsigned long s_addr)
 {
     gs_info_t *info;
     gs_block_t *blk;
@@ -419,7 +361,7 @@ void gm_check_set_update(int signum)
 
     log_msg(__FUNCTION__);
 
-    printf("cm.cs_num: %d\n", cm.cs_num);
+    printf("gm.gs_num: %d\n", gm.gs_num);
     blk = gm.gm_gs_blocks.next;
     while(blk != NULL)
     {

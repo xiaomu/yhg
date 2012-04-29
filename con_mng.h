@@ -40,6 +40,7 @@ struct
 {
 	int cnt;
 	int free;
+	int turn;
 	cs_info_t **ptrs;
 }cm_online;
 
@@ -59,7 +60,7 @@ int cm_build_free(cs_block_t *blk);
 int cm_expand_online();
 int cm_set_timer(long sec, long usec);
 int cm_remove_cs_by_infoaddr(cs_info_t *info);
-cs_info_t *cm_serch_cs_by_addr(unsigned long s_addr);
+cs_info_t *cm_search_cs_by_addr(unsigned long s_addr);
 cs_info_t **cm_online_search_by_ptr(cs_info_t *ptr);
 void cm_check_set_update(int signum);
 int cm_build_server(int port, int listen_num);

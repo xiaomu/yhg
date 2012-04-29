@@ -12,6 +12,9 @@
 int (*cmd_handler[HANDLER_NUM])(int fd, unsigned long s_addr, int *err);
 
 int handle_cs_notice_cm(int fd, unsigned long s_addr, int *err);
+int handle_client_query_cs(int fd, unsigned long s_addr, int *err);
+int handle_client_play_game(int fd, unsigned long s_addr, int *err);
+int handle_gs_notice_gm(int fd, unsigned long s_addr, int *err);
 
 void init_cmd_handler();
 

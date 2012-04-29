@@ -15,6 +15,9 @@
 #define CM_REMOVE_CS 2
 #define CM_UPDATE_CS 3
 #define CS_NOTICE_CM 4     //先只用这个， 来勉强实现上面三条命令的功能
+#define CLIENT_QUERY_CS 5
+#define CLIENT_PLAY_GAME 6
+#define GS_NOTICE_GM 7
 
 int recv_cmd(int fd, unsigned long s_addr);
 int send_cmd(int fd, int cmd_id, int len, void *content, int *err);

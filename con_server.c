@@ -7,72 +7,13 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <signal.h>
+#include <sys/ioctl.h>
 
 #include "con_server.h"
 #include "log.h"
 #include "error.h"
 #include "cmd.h"
 #include "utils.h"
-
- #if 0
-int main(int argc, char *argv[])
-{
-    // get opt
-    int opt;
-
-    char *menu[] =
-    {
-        "con_server -p cs_port -m cm_ip -n cm_port\n",
-        NULL
-    };
-
-    if(argc < 4)
-    {
-        help(menu);
-        return -1;
-    }
-
-    while((opt = getopt(argc, argv, "p:m:n:")) != -1)
-    {
-        switch(opt)
-        {
-            case 'p':
-                cs.cs_port = atoi(optarg);
-            case 'm':
-                cs.cm_ip = optarg;
-                break;
-            case 'n':
-                cs.cm_port = atoi(optarg);
-                break;
-            case ':':
-                printf("option needs a value\n");
-                break;
-            case '?':
-                printf("unknown option: %c\n", optopt);
-                break;
-
-        }
-    }
-
-
-    init_log(NULL, NULL);
-
-    log_msg(__FUNCTION__);
-
-    init_err_msg();
-    init_cmd_handler();
-
-
-    init_cs();
-    cs_set_notice_cm_timer(CS_NOTICE_CM_INTERVAL_SEC, CS_NOTICE_CM_INTERVAL_USEC);
-
-    while(1)
-    {
-        sleep(3);
-    }
-    return 0;
-}
- #endif
 
 int init_cs()
 {
