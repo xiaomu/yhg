@@ -1,3 +1,9 @@
+#/*****************************************************************************
+#*  Copyright          :  2012 All Rights Reserved.
+#*
+#*  Date               :  2012-04-30 21:49:25
+#*  Author             :  Dengzhaoqun
+# *****************************************************************************/
 all:client con_mng con_server game_mng game_server db_server
 
 CC = gcc

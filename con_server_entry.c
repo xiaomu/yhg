@@ -1,3 +1,9 @@
+/*****************************************************************************
+ *  Copyright          :  2012 All Rights Reserved.
+ *
+ *  Date               :  2012-04-30 21:41:29
+ *  Author             :  Dengzhaoqun
+ *****************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,22 +29,24 @@ int main(int argc, char *argv[])
 
     char *menu[] =
     {
-        "con_server -p cs_port -m cm_ip -n cm_port\n",
+        "con_server -p cs_port -c cs_listen_num -m cm_ip -n cm_port\n",
         NULL
     };
 
-    if(argc < 4)
+    if(argc < 9)
     {
         help(menu);
         return -1;
     }
 
-    while((opt = getopt(argc, argv, "p:m:n:")) != -1)
+    while((opt = getopt(argc, argv, "p:c:m:n:")) != -1)
     {
         switch(opt)
         {
             case 'p':
                 cs.cs_port = atoi(optarg);
+            case 'c':
+                cs.cs_listen_num = atoi(optarg);
             case 'm':
                 cs.cm_ip = optarg;
                 break;
@@ -66,11 +74,9 @@ int main(int argc, char *argv[])
 
     init_cs();
     cs_set_notice_cm_timer(CS_NOTICE_CM_INTERVAL_SEC, CS_NOTICE_CM_INTERVAL_USEC);
+    
+    cs_build_server(cs.cs_port, cs.cs_listen_num);
 
-    while(1)
-    {
-        sleep(3);
-    }
     return 0;
 }
 

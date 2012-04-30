@@ -1,3 +1,9 @@
+/*****************************************************************************
+ *  Copyright          :  2012 All Rights Reserved.
+ *
+ *  Date               :  2012-04-30 21:36:39
+ *  Author             :  Dengzhaoqun
+ *****************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,7 +49,7 @@ int client_query_cs(unsigned long s_addr, int port)
 
     if(result == -1)
     {
-        log_err("cs_notice_cm()", ERR_CONNECT_FAILED);
+        log_err("client_query_cs()", ERR_CONNECT_FAILED);
         return -1;
     }
     log_msg("connect succeed");
@@ -90,7 +96,7 @@ int client_play_game(unsigned long s_addr, int port)
 
     if(result == -1)
     {
-        log_err("cs_notice_cm()", ERR_CONNECT_FAILED);
+        log_err("client_play_game()", ERR_CONNECT_FAILED);
         return -1;
     }
     log_msg("connect succeed");

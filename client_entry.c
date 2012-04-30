@@ -1,3 +1,9 @@
+/*****************************************************************************
+ *  Copyright          :  2012 All Rights Reserved.
+ *
+ *  Date               :  2012-04-30 21:39:41
+ *  Author             :  Dengzhaoqun
+ *****************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,7 +41,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    while((opt = getopt(argc, argv, "p:n:")) != -1)
+    while((opt = getopt(argc, argv, "i:p:")) != -1)
     {
         switch(opt)
         {
