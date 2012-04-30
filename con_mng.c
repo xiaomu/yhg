@@ -390,6 +390,7 @@ void cm_check_set_update(int signum)
             {
                 cm_remove_cs_by_infoaddr(info);
             }
+            info ++;
         }
         blk = blk->next;
     }

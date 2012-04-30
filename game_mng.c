@@ -380,6 +380,7 @@ void gm_check_set_update(int signum)
             {
                 gm_remove_gs_by_infoaddr(info);
             }
+            info ++;
         }
         blk = blk->next;
     }

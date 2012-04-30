@@ -18,6 +18,8 @@ int recv_cmd(int fd, unsigned long s_addr)
       int err;
       char tmp[20];
 
+      log_msg(__FUNCTION__);
+
       read(fd, &cmd_id, sizeof(int));
 
 

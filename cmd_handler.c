@@ -26,6 +26,7 @@ void init_cmd_handler()
     cmd_handler[CS_NOTICE_CM] = handle_cs_notice_cm;
     cmd_handler[CLIENT_QUERY_CS] = handle_client_query_cs;
     cmd_handler[CLIENT_PLAY_GAME] = handle_client_play_game;
+    cmd_handler[GS_NOTICE_GM] = handle_gs_notice_gm;
 }
 
 int handle_cs_notice_cm(int fd, unsigned long s_addr, int *err)
@@ -69,6 +70,8 @@ int handle_client_query_cs(int fd, unsigned long s_addr, int *err)
     unsigned long cs_s_addr;
     int cs_port;
 
+    log_msg(__FUNCTION__);
+
     if(cm_online.cnt > 0)
     {
         if(cm_online.turn >= cm_online.cnt)
@@ -95,6 +98,9 @@ int handle_client_query_cs(int fd, unsigned long s_addr, int *err)
 
 int handle_client_play_game(int fd, unsigned long s_addr, int *err)
 {
+
+    log_msg(__FUNCTION__);
+
     // this function need change
     char *temp = "client game success";
 
